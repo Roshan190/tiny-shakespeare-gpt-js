@@ -1,0 +1,19 @@
+{
+  "name": "tiny-shakespeare-gpt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A tiny character-level GPT trained on Shakespeare, built from scratch in JavaScript.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "train": "node main.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

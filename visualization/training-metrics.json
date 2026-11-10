@@ -1,0 +1,98 @@
+[
+  {
+    "epoch": 1,
+    "trainingLoss": 2.400840599302186,
+    "validationLoss": 2.4747986666397743,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 2,
+    "trainingLoss": 2.383633792997218,
+    "validationLoss": 2.4119074569175893,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 3,
+    "trainingLoss": 2.3662814382786195,
+    "validationLoss": 2.3877507602257575,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 4,
+    "trainingLoss": 2.3503818796392477,
+    "validationLoss": 2.3355418053477317,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 5,
+    "trainingLoss": 2.3356199083380336,
+    "validationLoss": 2.3813225622824152,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 6,
+    "trainingLoss": 2.3165840674754383,
+    "validationLoss": 2.346812129884662,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 7,
+    "trainingLoss": 2.3127732881890446,
+    "validationLoss": 2.3250637566082415,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 8,
+    "trainingLoss": 2.2935830804876844,
+    "validationLoss": 2.3145371047449492,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 9,
+    "trainingLoss": 2.2945065113535255,
+    "validationLoss": 2.2872287400438434,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 10,
+    "trainingLoss": 2.2750543633752267,
+    "validationLoss": 2.3660031303440374,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 11,
+    "trainingLoss": 2.2769138553902133,
+    "validationLoss": 2.2907902890087195,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 12,
+    "trainingLoss": 2.261113139156008,
+    "validationLoss": 2.2323549773486784,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 13,
+    "trainingLoss": 2.2545723620532594,
+    "validationLoss": 2.3159356762609,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 14,
+    "trainingLoss": 2.2427058272088733,
+    "validationLoss": 2.3190835156012883,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 15,
+    "trainingLoss": 2.2388877498571413,
+    "validationLoss": 2.2520929293840934,
+    "learningRate": 0.01
+  },
+  {
+    "epoch": 16,
+    "trainingLoss": 2.2312389904597416,
+    "validationLoss": 2.2506057239241284,
+    "learningRate": 0.01
+  }
+]

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiny Shakespeare GPT</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">Character-level GPT · plain JavaScript</p>
+      <h1>Tiny Shakespeare GPT</h1>
+      <p class="lede">
+        A small decoder-only model trained on Tiny Shakespeare. It predicts the next character. It is not a chat model.
+      </p>
+    </header>
+
+    <p id="banner" class="banner" hidden></p>
+
+    <section class="card" aria-labelledby="generate-heading">
+      <h2 id="generate-heading">Text generation</h2>
+      <form id="generate-form">
+        <label for="prompt">Starting prompt</label>
+        <textarea id="prompt" name="prompt" rows="4" maxlength="2000">ROMEO:</textarea>
+
+        <div class="fields">
+          <div>
+            <label for="max-new-tokens">New characters</label>
+            <input id="max-new-tokens" name="maxNewTokens" type="number" min="0" max="1000" step="1" value="300">
+          </div>
+          <div>
+            <label for="temperature">Temperature <span id="temperature-value">0.8</span></label>
+            <input id="temperature" name="temperature" type="range" min="0.1" max="2" step="0.1" value="0.8">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="generate-button" type="submit">Generate</button>
+          <button id="copy-button" type="button" disabled>Copy text</button>
+        </div>
+      </form>
+      <p id="generate-note" class="note"></p>
+      <pre id="output" class="output" aria-live="polite">Generated text appears here.</pre>
+    </section>
+
+    <section class="card" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">Model and training</h2>
+      <dl class="stats">
+        <div>
+          <dt>Model</dt>
+          <dd id="model-loaded">Checking…</dd>
+        </div>
+        <div>
+          <dt>Checkpoint</dt>
+          <dd id="checkpoint-state">Checking…</dd>
+        </div>
+        <div>
+          <dt>Architecture</dt>
+          <dd id="architecture">—</dd>
+        </div>
+        <div>
+          <dt>Parameters</dt>
+          <dd id="parameter-count">—</dd>
+        </div>
+        <div>
+          <dt>Training</dt>
+          <dd id="training-status">—</dd>
+        </div>
+        <div>
+          <dt>Epoch</dt>
+          <dd id="epoch">—</dd>
+        </div>
+        <div>
+          <dt>Step</dt>
+          <dd id="step">—</dd>
+        </div>
+        <div>
+          <dt>Training loss</dt>
+          <dd id="training-loss">—</dd>
+        </div>
+        <div>
+          <dt>Validation loss</dt>
+          <dd id="validation-loss">—</dd>
+        </div>
+      </dl>
+
+      <div class="progress" aria-hidden="true">
+        <span id="progress-bar"></span>
+      </div>
+      <p id="training-message" class="note"></p>
+      <p id="training-error" class="error" hidden></p>
+
+      <form id="train-form" novalidate>
+        <label for="mode">Training mode</label>
+        <select id="mode" name="mode">
+          <option value="resume">Resume saved weights</option>
+          <option value="fresh">Fresh random weights</option>
+        </select>
+        <p id="mode-help" class="note"></p>
+
+        <div class="fields">
+          <div>
+            <label for="epochs">Epochs</label>
+            <input id="epochs" name="epochs" type="number" min="1" max="100" step="1" value="10">
+          </div>
+          <div>
+            <label for="steps-per-epoch">Steps per epoch</label>
+            <input id="steps-per-epoch" name="stepsPerEpoch" type="number" min="1" max="2000" step="1" value="100">
+          </div>
+          <div>
+            <label for="learning-rate">Learning rate</label>
+            <input id="learning-rate" name="learningRate" type="number" min="0.000001" max="1" step="any" value="0.0003">
+          </div>
+        </div>
+
+        <button id="train-button" type="submit">Start training</button>
+      </form>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
