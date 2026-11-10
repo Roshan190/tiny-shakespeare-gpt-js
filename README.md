@@ -10,6 +10,61 @@ The corpus is split into characters. A deterministic tokenizer sorts the unique 
 
 Training minimizes softmax cross-entropy with plain stochastic gradient descent. There is no Adam, momentum, or weight decay, so the optimizer has no state beyond the weights themselves. Generation turns the logits at the last position into probabilities, scales them by a temperature, and samples the next character. The context window never grows past the model's maximum sequence length.
 
+## Flow
+
+Startup reads the corpus once, builds the tokenizer, and loads `checkpoints/shakespeare-model.json` into one in-memory model. Generation reuses that model. Training runs in a separate worker so the HTTP server stays responsive.
+
+```mermaid
+flowchart TD
+  browser[Browser at localhost:3000]
+  api[Express API]
+  memory[In-memory GPT]
+  worker[Training worker]
+  corpus[data/shakespeare.txt]
+  checkpoint[checkpoints/shakespeare-model.json]
+
+  browser -->|Generate| api
+  browser -->|Start training| api
+  browser -->|Progress events| api
+  api --> memory
+  api -->|One job at a time| worker
+  corpus --> memory
+  corpus --> worker
+  checkpoint -->|Load on startup| memory
+  worker -->|Write temp file, then rename| checkpoint
+  worker -->|Epoch finished| api
+  api -->|Reload saved weights| memory
+```
+
+Each new character is one forward pass. The prompt is kept, and only the last `maxSequenceLength` token ids are sent into the model.
+
+```mermaid
+flowchart LR
+  prompt[Prompt characters] --> encode[Tokenizer encode]
+  encode --> window[Context window]
+  window --> embed[Token and position embeddings]
+  embed --> blocks[Causal Transformer blocks]
+  blocks --> logits[Vocabulary logits]
+  logits --> sample[Temperature sample]
+  sample --> character[Next character]
+  character --> prompt
+```
+
+One training step uses a random next-token batch. The checkpoint is replaced only after an epoch finishes, and only by renaming a completed temp file over the previous file.
+
+```mermaid
+flowchart TD
+  batch[Random batch from the corpus] --> forward[Forward pass]
+  forward --> loss[Softmax cross-entropy]
+  loss --> backward[Backpropagation]
+  backward --> update[SGD update]
+  update --> batch
+  update --> epoch{Epoch complete?}
+  epoch -->|Yes| validate[Validation loss]
+  validate --> save[Save checkpoint atomically]
+  epoch -->|No| batch
+```
+
 ## Architecture
 
 The network is a decoder-only Transformer:
